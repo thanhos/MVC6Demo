@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    // ViewBag.Title = "Home Page";
+}
+@*Tutorial followed at http://www.c-sharpcorner.com/UploadFile/8c19e8/Asp-Net-5-getting-started-with-Asp-Net-mvc-6/*@
+
+@model IEnumerable<MVC6Demo.Models.DOTAHero> 
+  @inject MVC6Demo.Models.HeroStats Stats
+<h3>My Favorite DOTA Heroes</h3>
+<ul>
+  @foreach (var p in Model)
+  {
+    <li>@($"{p.Name} {p.Type}")</li>
+  }
+</ul>
+<div>
+  <span>Number of Strength: @await Stats.GetHeroCountByType("strength")</span>
+  <br/>
+  <span>Number of Agility: @await Stats.GetHeroCountByType("agility")</span>
+  <br/>
+  <span>Number of Intelligence: @await Stats.GetHeroCountByType("intelligence")</span>
+  <br/>
+  <span>Total Heroes: @await Stats.GetHeroCount()</span>
+</div>
+
+<div>
+  @await Component.InvokeAsync("HeroList", "strength")
+</div>
